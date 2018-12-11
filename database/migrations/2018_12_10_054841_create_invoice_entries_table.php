@@ -15,8 +15,10 @@ class CreateInvoiceEntriesTable extends Migration
     {
         Schema::create('invoice_entries', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('invoice_no');
             $table->integer('supplier_id');
             $table->date('date_of_invoice');
+            $table->boolean('entered')->default(0);
             $table->timestamps();
         });
     }

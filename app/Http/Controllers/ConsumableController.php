@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\consumable;
+use App\category;
 use Illuminate\Http\Request;
 
 class ConsumableController extends Controller
@@ -14,7 +15,8 @@ class ConsumableController extends Controller
      */
     public function index()
     {
-        //
+        $consumables = consumable::all();
+       return view('consumable.index')->with('consumables',$consumables);
     }
 
     /**
@@ -25,6 +27,8 @@ class ConsumableController extends Controller
     public function create()
     {
         //
+        $categories = category::where('consumable','1')->get();
+        return view('consumable.master')->with('categories',$categories);
     }
 
     /**
@@ -35,7 +39,21 @@ class ConsumableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => ['required','unique:consumables'],
+            'category' => ['required','integer'],
+        ]);
+
+        $consumable = new consumable();
+        $consumable->name = $request['name'];
+        $consumable->category = $request['category'];
+        if($request->has('balance')){
+            $consumable->balance = $request['balance'];
+        }else{
+            $consumable->balance = 0;
+        }
+        $consumable->save();
+        return redirect('/consumables');
     }
 
     /**
@@ -55,9 +73,11 @@ class ConsumableController extends Controller
      * @param  \App\consumable  $consumable
      * @return \Illuminate\Http\Response
      */
-    public function edit(consumable $consumable)
+    public function edit($con)
     {
-        //
+        $categories = category::where('consumable','1')->get();
+        $consumable = consumable::find($con);
+        return view('consumable.edit')->with('consumable',$consumable)->with('categories',$categories);
     }
 
     /**
@@ -67,9 +87,14 @@ class ConsumableController extends Controller
      * @param  \App\consumable  $consumable
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, consumable $consumable)
+    public function update(Request $request, $con)
     {
-        //
+        $consumable = consumable::find($con);
+        $consumable->name = $request['name'];
+        $consumable->balance = $request['balance'];
+        $consumable->category = $request['category'];
+        $consumable->save();
+        return redirect('/consumables');
     }
 
     /**

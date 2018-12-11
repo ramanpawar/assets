@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\invoice_entry;
+use App\supplier;
 use Illuminate\Http\Request;
 
 class InvoiceEntryController extends Controller
@@ -14,7 +15,8 @@ class InvoiceEntryController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = invoice_entry::all();
+        return view('invoice.index')->with('invoices',$invoices);
     }
 
     /**
@@ -24,7 +26,8 @@ class InvoiceEntryController extends Controller
      */
     public function create()
     {
-        //
+        $suppliers = supplier::all();
+        return view('invoice.entry')->with('suppliers',$suppliers);
     }
 
     /**
@@ -35,7 +38,20 @@ class InvoiceEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'invoice_no' => 'required',
+            'date' => ['required','date'],
+            'supplier' => 'required',
+        ]);
+
+        $invoice = new invoice_entry();
+        $invoice->invoice_no = $request['invoice_no'];
+        $invoice->date_of_invoice = $request['date'];
+        $invoice->supplier_id = $request['supplier'];
+        $invoice->save();
+
+        return redirect('/invoice');
+        
     }
 
     /**

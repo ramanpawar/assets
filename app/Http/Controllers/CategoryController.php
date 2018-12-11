@@ -38,6 +38,9 @@ class CategoryController extends Controller
     {
         $category = new category();
         $category->name = $request['category'];
+        if($request->has('consumable')){
+            $category->consumable = 1;
+        }
         $category->save();
 
         return redirect('/category');

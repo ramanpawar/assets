@@ -16,6 +16,7 @@ class CreateInvoiceDetailsTable extends Migration
         Schema::create('invoice_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('invoice_id');
+            $table->boolean('consumable');
             $table->integer('category');
             $table->integer('item_id');
             $table->integer('qty');

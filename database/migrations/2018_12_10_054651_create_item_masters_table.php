@@ -17,7 +17,7 @@ class CreateItemMastersTable extends Migration
             $table->increments('id');
             $table->string('make');
             $table->integer('category');
-            $table->integer('subcategory')->nullable();
+            $table->integer('specification')->nullable();
             $table->string('description');
             $table->timestamps();
         });

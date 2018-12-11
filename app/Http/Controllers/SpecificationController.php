@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\invoice_details;
-use App\category;
+use App\specification;
 use Illuminate\Http\Request;
 
-class InvoiceDetailsController extends Controller
+class SpecificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class InvoiceDetailsController extends Controller
      */
     public function index()
     {
-        $categories = category::all();
-        return view('invoice.detailsadd')->with('categories',$categories);
+        //
     }
 
     /**
@@ -43,10 +41,10 @@ class InvoiceDetailsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\invoice_details  $invoice_details
+     * @param  \App\specification  $specification
      * @return \Illuminate\Http\Response
      */
-    public function show(invoice_details $invoice_details)
+    public function show(specification $specification)
     {
         //
     }
@@ -54,10 +52,10 @@ class InvoiceDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\invoice_details  $invoice_details
+     * @param  \App\specification  $specification
      * @return \Illuminate\Http\Response
      */
-    public function edit(invoice_details $invoice_details)
+    public function edit(specification $specification)
     {
         //
     }
@@ -66,10 +64,10 @@ class InvoiceDetailsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\invoice_details  $invoice_details
+     * @param  \App\specification  $specification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, invoice_details $invoice_details)
+    public function update(Request $request, specification $specification)
     {
         //
     }
@@ -77,10 +75,10 @@ class InvoiceDetailsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\invoice_details  $invoice_details
+     * @param  \App\specification  $specification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(invoice_details $invoice_details)
+    public function destroy(specification $specification)
     {
         //
     }

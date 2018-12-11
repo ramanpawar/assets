@@ -30,6 +30,7 @@
             <label for="category">Name</label>
             <input type="text" class="form-control" name="category" placeholder="Enter category name">
         </div>
+        <input type="checkbox" name="consumable" id=""><label for="consumable" style="display:block">Consumable</label>
         <input type="submit" class="btn btn-primary" value="Save">
         </form>
     </div>
