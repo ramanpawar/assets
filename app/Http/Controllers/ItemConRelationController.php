@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\item_con_relation;
 use Illuminate\Http\Request;
+use App\consumable;
+use App\item_master;
 
 class ItemConRelationController extends Controller
 {
@@ -24,7 +26,11 @@ class ItemConRelationController extends Controller
      */
     public function create()
     {
-        //
+        $item = item_master::find('2');
+        $consumable = consumable::find('1');
+
+        $item->consumables()->attach($consumable);
+        return "Success";
     }
 
     /**
@@ -44,9 +50,11 @@ class ItemConRelationController extends Controller
      * @param  \App\item_con_relation  $item_con_relation
      * @return \Illuminate\Http\Response
      */
-    public function show(item_con_relation $item_con_relation)
+    public function show($id)
     {
-        //
+        $item = item_master::find($id);
+        return $item->consumables;
+        
     }
 
     /**
@@ -81,5 +89,8 @@ class ItemConRelationController extends Controller
     public function destroy(item_con_relation $item_con_relation)
     {
         //
+    }
+    public function add(){
+        return 1;
     }
 }

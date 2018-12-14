@@ -11,5 +11,7 @@ class consumable extends Model
         return $this->belongsTo('App\category','category','id');
     }
 
-    
+    public function item_masters(){
+        return $this->belongsToMany('App\item_master')->with(timestamps);
+    }
 }
