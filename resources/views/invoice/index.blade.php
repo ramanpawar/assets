@@ -17,7 +17,7 @@
                     <td>{{$invoice->date_of_invoice}}</td>
                     <td>{{$invoice->supp->name}}</td>
                     <td>@if ($invoice->entered == 0)
-                        <a href="#" class="btn btn-secondary">Enter</a>
+                    <a href="/invoice/{{$invoice->id}}" class="btn btn-secondary">Enter</a>
                     @endif</td>
                 </tr>
             @endforeach

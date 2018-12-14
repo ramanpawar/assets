@@ -28,3 +28,9 @@ Route::resource('/relation','ItemConRelationController');
 Route::resource('/invoice','InvoiceEntryController');
 Route::resource('/section','SectionController');
 Route::resource('/supplier','SupplierController');
+
+
+Route::get('/acon','ajax@consumable');
+Route::get('/ahard','ajax@hardware');
+Route::post('/assets/add','AssetMasterController@add');
+Route::get('/assets/receive/{id}','AssetMasterController@addview');

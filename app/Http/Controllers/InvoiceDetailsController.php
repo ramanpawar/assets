@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\invoice_details;
 use App\category;
 use Illuminate\Http\Request;
+use App\invoice_entry;
 
 class InvoiceDetailsController extends Controller
 {
@@ -15,8 +16,9 @@ class InvoiceDetailsController extends Controller
      */
     public function index()
     {
-        $categories = category::all();
-        return view('invoice.detailsadd')->with('categories',$categories);
+        $details = invoice_details::where('processed','0')->get();
+        return view('invoice.detailsindex')->with('invoices',$details);
+        
     }
 
     /**
@@ -37,7 +39,43 @@ class InvoiceDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request['invoice_no'] != ''){
+            $invoice = $_POST['invoice_no'];
+        }else{
+            return "Can't proceed without invoice no";
+        }
+
+        if($request->has('consumablecat')){
+            $concount = count($_POST['consumablecat']);
+            for($i=0;$i<$concount;$i++){
+                $entry = new invoice_details();
+                $entry->invoice_id = $invoice;
+                $entry->category = $_POST['consumablecat'][$i];
+                $entry->item_id = $_POST['consumableitem'][$i];
+                $entry->qty = $_POST['qtyconsumable'][$i];
+                $entry->rate = $_POST['rateconsumable'][$i];
+                $entry->save();
+            }
+
+        }
+
+        if($request->has('hardwarecat')){
+        $hardcount = count($_POST['hardwarecat']);
+            for($i=0;$i<$hardcount;$i++){
+                $entry = new invoice_details();
+                $entry->invoice_id = $invoice;
+                $entry->category = $_POST['hardwarecat'][$i];
+                $entry->item_id = $_POST['hardwareitem'][$i];
+                $entry->qty = $_POST['qtyitem'][$i];
+                $entry->rate = $_POST['rateitem'][$i];
+                $entry->save();
+            }
+        }
+        $invoice = invoice_entry::find($invoice);
+        $invoice->entered = '1';
+        $invoice->save();
+
+        return "Invoice details successfully posted";
     }
 
     /**
