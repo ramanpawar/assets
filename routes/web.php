@@ -34,3 +34,5 @@ Route::get('/acon','ajax@consumable');
 Route::get('/ahard','ajax@hardware');
 Route::post('/assets/add','AssetMasterController@add');
 Route::get('/assets/receive/{id}','AssetMasterController@addview');
+
+Route::get('/relation/add','ItemConRelationController@add');

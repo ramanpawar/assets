@@ -13,4 +13,8 @@ class item_master extends Model
     public function spec(){
         return $this->hasOne('App\specification','id','specification');
     }
+
+    public function consumables(){
+        return $this->belongsToMany('App\consumable');
+    }
 }
