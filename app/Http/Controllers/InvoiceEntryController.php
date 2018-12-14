@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\invoice_entry;
+
 use App\supplier;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
+
 
 class InvoiceEntryController extends Controller
 {
@@ -38,8 +42,13 @@ class InvoiceEntryController extends Controller
      */
     public function store(Request $request)
     {
+        $invoice_no = $request['invoice_no'];
+        $supplier = $request['supplier'];
         $validate = $request->validate([
-            'invoice_no' => 'required',
+            'invoice_no' => ['required',Rule::unique('invoice_entries')->where(function ($query) use($invoice_no,$supplier) {
+                return $query->where('invoice_no', $invoice_no)
+                ->where('supplier_id', $supplier);
+            }),],
             'date' => ['required','date'],
             'supplier' => 'required',
         ]);
@@ -60,9 +69,10 @@ class InvoiceEntryController extends Controller
      * @param  \App\invoice_entry  $invoice_entry
      * @return \Illuminate\Http\Response
      */
-    public function show(invoice_entry $invoice_entry)
+    public function show($invoice_id)
     {
-        //
+        $invoice = invoice_entry::find($invoice_id);
+    return view('invoice.invoice')->with('invoice_no',$invoice->invoice_no)->with('invoice_id',$invoice->id);
     }
 
     /**

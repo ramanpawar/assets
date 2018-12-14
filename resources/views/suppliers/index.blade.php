@@ -16,12 +16,14 @@
                 </thead>
                 <tbody>
                     @foreach ($suppliers as $supplier)
+                    <tr>
                     <td>{{$supplier->name}}</td>
                     <td>{{$supplier->gstno}}</td>
                     <td>{{$supplier->address}}</td>
                     <td>{{$supplier->mobile}}</td>
                     <td>{{$supplier->email}}</td>
                     <td><button type="button" class="btn btn-secondary" value="Edit"><a href="/supplier/{{$supplier->id}}/edit" style="color:white;text-decoration:none;">Edit</a></button></td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
