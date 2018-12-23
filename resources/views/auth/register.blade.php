@@ -40,6 +40,22 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="section" class="col-md-4 col-form-label text-md-right">Section</label>
+
+                            <div class="col-md-6">
+                                @if (count($sections) > 0)
+                                    <select name="section" class="form-control">
+                                    <option disabled selected>Select</option>
+                                    @foreach ($sections as $section)
+                                    <option value="{{$section->id}}">{{$section->name}}</option>
+                                        
+                                    @endforeach
+                                    </select>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

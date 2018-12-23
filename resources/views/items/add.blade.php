@@ -48,7 +48,7 @@
             $('#specification').css('display','none');
             
             $('#category').change(function (e) { 
-                if($('#category').val() == 2){
+                if($('#category').children('option:selected').html() == 'Computer'){
                     $('#specification').css('display','block');
                     var data = '<div class="row mx-3 my-3">' +
                                 '<div class="form-group col-md-4">'+

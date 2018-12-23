@@ -40,7 +40,7 @@ class SupplierController extends Controller
         $validated = $request->validate([
             'name' => ['required','string'],
             'gstno' => ['required','unique:suppliers'],
-            'mobile' => ['required','integer','min:1000000000'],
+            'mobile' => ['required','digits:10'],
             'email' => ['required','email'],
             'address' => ['required'],
         ]);

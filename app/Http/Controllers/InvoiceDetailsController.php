@@ -16,7 +16,7 @@ class InvoiceDetailsController extends Controller
      */
     public function index()
     {
-        $details = invoice_details::where('processed','0')->get();
+        $details = invoice_details::all();
         return view('invoice.detailsindex')->with('invoices',$details);
         
     }

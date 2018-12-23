@@ -25,7 +25,8 @@ class SectionController extends Controller
      */
     public function create()
     {
-        //
+        $section = section::find(1);
+        return $section->users;
     }
 
     /**
@@ -87,5 +88,16 @@ class SectionController extends Controller
     public function destroy(section $section)
     {
         //
+    }
+
+    public function section(Request $request)
+    {
+        $section = section::find($request['section']);
+        $response = '';
+        foreach ($section->users as $user) {
+            $response .= "<option value='".$user->id."'>".$user->name."</option>";
+
+        }
+        return $response;
     }
 }

@@ -16,7 +16,8 @@ class ItemConRelationController extends Controller
      */
     public function index()
     {
-        return view('relation.index');
+        $items = item_master::all();
+        return view('relation.index')->with('item',$items);
     }
 
     /**
@@ -26,11 +27,14 @@ class ItemConRelationController extends Controller
      */
     public function create()
     {
-        $item = item_master::find('2');
+        /*$item = item_master::find('2');
         $consumable = consumable::find('1');
 
         $item->consumables()->attach($consumable);
-        return "Success";
+        return "Success";*/
+        $items = item_master::all();
+        $consumable = consumable::all();
+        return view('relation.add')->with('items',$items)->with('consumable',$consumable);
     }
 
     /**
@@ -41,7 +45,14 @@ class ItemConRelationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'item' => 'required',
+            'consumable' => 'required',
+        ]);
+            $item = item_master::find($request['item']);
+            $item->consumables()->attach($request['consumable']);
+            return "All Done";
+
     }
 
     /**
@@ -52,8 +63,10 @@ class ItemConRelationController extends Controller
      */
     public function show($id)
     {
+        
         $item = item_master::find($id);
-        return $item->consumables;
+        
+        return view('relation.index')->with('item',$item);
         
     }
 
