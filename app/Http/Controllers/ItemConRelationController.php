@@ -6,6 +6,7 @@ use App\item_con_relation;
 use Illuminate\Http\Request;
 use App\consumable;
 use App\item_master;
+use App\asset_master;
 
 class ItemConRelationController extends Controller
 {
@@ -105,5 +106,15 @@ class ItemConRelationController extends Controller
     }
     public function add(){
         return 1;
+    }
+    public function acategory($id)
+    {
+        $asset = asset_master::find($id);
+        $consumables = '';
+
+        foreach ($asset->item->consumables as $consumable) {
+            $consumables .= "<option value='".$consumable->id."'>".$consumable->name." ".$consumable->cat->name."</option>";
+        }
+        return $consumables;
     }
 }

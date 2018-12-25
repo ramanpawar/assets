@@ -25,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $asset = asset_issue::with([('user:id,name,section_id'),'asset'])->get();
-        return $asset;
+        $asset = asset_issue::with([('user:id,name,section_id'),'asset'])
+                ->get();
+        
         return view('home');
     }
 }

@@ -29,6 +29,14 @@ Route::resource('/invoice','InvoiceEntryController');
 Route::resource('/section','SectionController');
 Route::resource('/supplier','SupplierController');
 Route::resource('/issues','AssetIssueController');
+Route::resource('/request','RequestsController');
+Route::resource("/approve",'approve');
+
+Route::get('request/approve/{id}','approve@approve');
+Route::get('request/issue/{id}','approve@issue');
+Route::get('request/reject/{id}','approve@reject');
+Route::get('/acategory/{id}','ItemConRelationController@acategory');
+
 
 
 Route::get('/acon','ajax@consumable');

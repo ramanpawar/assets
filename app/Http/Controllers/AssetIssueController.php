@@ -43,7 +43,7 @@ class AssetIssueController extends Controller
         $issue = new asset_issue();
         $issue->asset_id = $request['asset'];
         $issue->user_id = $request['user'];
-        $issue->date = date('Y,m,d');
+        $issue->date_of_issue = date('Y,m,d');
         $issue->issue = 1;
         $issue->save();
         $asset = asset_master::find($request['asset']);
