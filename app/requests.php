@@ -20,4 +20,8 @@ class requests extends Model
     {
         return $this->belongsTo('App\category','item_id','id');
     }
+    public function asset()
+    {
+        return $this->belongsTo('App\asset_master','asset_id','id');
+    }
 }

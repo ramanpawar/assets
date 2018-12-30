@@ -17,10 +17,12 @@ class CreateRequestsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->boolean('consumable');
+            $table->integer('asset_id')->nullable();
             $table->integer('item_id');
             $table->integer('approved');
             $table->date('approval_date')->nullable();
             $table->boolean('received');
+            $table->integer('asset_id');
             $table->date('date_of_receiving')->nullable();
             $table->string('remarks')->default('0');
             $table->timestamps();

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\requests;
 use App\consumable;
+use App\category;
+use App\section;
+use App\User;
 
 class approve extends Controller
 {
@@ -117,7 +120,14 @@ class approve extends Controller
     }
     public function issue($id)
     {
+        
         $req = requests::find($id);
+        if ($req->consumable == 0) {
+            $categories = category::all();
+        $section = section::all();
+        $users = User::where('section_id',$req->user->section->id)->get();
+        return view('issue.request')->with('categories',$categories)->with('sections',$section)->with('req',$req)->with('users',$users);
+        }
         $req->received = 1;
         $req->date_of_receiving = date('Y,m,d');
         $req->save();

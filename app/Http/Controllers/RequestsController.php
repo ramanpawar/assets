@@ -19,7 +19,7 @@ class RequestsController extends Controller
     public function index()
     {
         $requests = requests::where('user_id',Auth::user()->id)->get();
-        return $requests;
+        return view('request.index')->with('requests',$requests);
     }
 
     /**
@@ -54,6 +54,7 @@ class RequestsController extends Controller
         if(!empty($request['consumable'])){
         $req->consumable = 1;
         $req->item_id = $request['consumable'];
+        $req->asset_id = $request['asset'];
         }
         if(!empty($request['category'])){
             $req->consumable = 0;

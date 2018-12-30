@@ -48,7 +48,16 @@ class AssetIssueController extends Controller
         $issue->save();
         $asset = asset_master::find($request['asset']);
         $asset->in_stock = 0;
+        $issue->request_id = $request['request_id'];
         $asset->save();
+        if ($request->has('request_id')) {
+            $req = requests::find($request['request_id']);
+            $req->asset_id = $request['asset'];
+            $req->received = 1;
+            $req->date_of_receiving = date('Y,m,d');
+            $req->save();
+            return Redirect::back();
+        }
         return redirect('/issues/create')->with('message','Asset Issued');
     }
 

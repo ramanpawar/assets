@@ -19,6 +19,7 @@ class CreateAssetIssuesTable extends Migration
             $table->integer('user_id');
             $table->boolean('issue');
             $table->date('date_of_issue');
+            $table->integer('request_id');
             $table->date('receivedate')->nullable();
             $table->timestamps();
         });

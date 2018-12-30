@@ -38,7 +38,7 @@
     </div>
 
     
-        @if ($item->category == '2')
+        @if ($item->cat->name == 'Computer')
         <div id="specification" class="container card mb-3">
             <div class="row mx-3 my-3">
                     <div class="form-group col-md-4">
